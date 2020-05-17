@@ -3,7 +3,7 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 
-const name = 'Yasunori Koga'
+const name = 'dyekv'
 export const siteTitle = 'Next.js Sample Website'
 
 export default function Layout({ children, home }) {
@@ -33,6 +33,22 @@ export default function Layout({ children, home }) {
                             alt={name}
                         />
                         <h1 className={utilStyles.heading2Xl}>{name}</h1>
+                        <div style={{ display: 'flex' }}>
+                            <Link href='https://twitter.com/dyekv1'>
+                                <a><img
+                                    src="/images/twitter.png"
+                                    alt={'twitter'}
+                                    style={{ width: '40px', margin: '10px' }}
+                                /></a>
+                            </Link>
+                            <Link href='https://github.com/dyekv'>
+                                <a><img
+                                    src="/images/github.png"
+                                    alt={'twitter'}
+                                    style={{ width: '40px', margin: '10px' }}
+                                /></a>
+                            </Link>
+                        </div>
                     </>
                 ) : (
                         <>
