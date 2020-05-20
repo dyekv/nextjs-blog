@@ -2,16 +2,36 @@ import React, { useState } from 'react'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Head from 'next/head'
-import Date from '../../components/date'
+import DateCompornent from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
-
-
+// import { format } from 'date-fns'
 
 
 export default function Post({ postData }) {
 
     const [name, setName] = useState("")
     const [comment, setComment] = useState("")
+
+    const sendData = () => {
+
+        const data = {
+            name: name,
+            comment: comment,
+            date: new Date().toString(),
+            title: postData.title,
+        }
+        const url = "http://localhost:3000/api/postComment"
+        fetch(url, {
+            method: 'POST',
+            body: JSON.stringify(data),
+            hedders: {
+                'Content-Type': 'application/json'
+            }
+        }).then(res => res.json())
+            .then(response => console.log('Success:', JSON.stringify(response)))
+            .catch(error => console.error('Error:', error))
+        // return alert(format(new Date(), 'yyyy年MM月dd日'))
+    }
 
     return (
         <Layout>
@@ -21,7 +41,7 @@ export default function Post({ postData }) {
             <article>
                 <h1 className={utilStyles.headingXl}>{postData.title}</h1>
                 <div className={utilStyles.lightText}>
-                    <Date dateString={postData.date} />
+                    <DateCompornent dateString={postData.date} />
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
             </article>
@@ -36,6 +56,7 @@ export default function Post({ postData }) {
                     value={comment}
                     onChange={(e) => setComment(e.target.value)} />
                 {comment}
+                <button onClick={() => sendData()}>送信</button>
             </div>
         </Layout>
     )
