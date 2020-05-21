@@ -1,5 +1,6 @@
 export default (req, res) => {
-    res.json({
+    // alert('req')
+    return res.json({
         text: 'Hello',
         method: req.method,
     })
