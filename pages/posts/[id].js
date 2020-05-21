@@ -2,35 +2,52 @@ import React, { useState } from 'react'
 import Layout from '../../components/layout'
 import { getAllPostIds, getPostData } from '../../lib/posts'
 import Head from 'next/head'
+// import useRouter from 'next/router'
 import DateCompornent from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
+import { fs } from 'fs'
 // import { format } from 'date-fns'
+// import useSWR from 'swr';
 
+// const fetcher = url => fetch(url).then(res => res.json())
 
 export default function Post({ postData }) {
 
     const [name, setName] = useState("")
     const [comment, setComment] = useState("")
 
+    // const { query } = useRouter()
+    // const { data, error } = useSWR(
+    //     () => query.id && `/api/postComment`,
+    //     fetcher
+    // )
+
     const sendData = () => {
 
-        const data = {
-            name: name,
-            comment: comment,
-            date: new Date().toString(),
-            title: postData.title,
-        }
-        const url = "http://localhost:3000/api/postComment"
-        fetch(url, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            hedders: {
-                'Content-Type': 'application/json'
+        // const data = {
+        //     name: name,
+        //     comment: comment,
+        //     date: new Date().toString(),
+        //     title: postData.title,
+        // }
+
+        // const url = "http://localhost:3000/api/postComment"
+        // fetch(url, {
+        //     method: 'POST',
+        //     body: JSON.stringify(data),
+        //     hedders: {
+        //         'Content-Type': 'application/json'
+        //     }
+        // }).then(res => res.json())
+        //     .then(response => console.log('Success:', JSON.stringify(response)))
+        //     .catch(error => console.error('Error:', error))
+        // // return alert(format(new Date(), 'yyyy年MM月dd日'))
+
+        fs.writeFileSync('../../comments/test.text', "test", utf - 8, (err) => {
+            if (err) {
+                console.log(err);
             }
-        }).then(res => res.json())
-            .then(response => console.log('Success:', JSON.stringify(response)))
-            .catch(error => console.error('Error:', error))
-        // return alert(format(new Date(), 'yyyy年MM月dd日'))
+        })
     }
 
     return (
